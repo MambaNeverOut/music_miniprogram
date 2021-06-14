@@ -1,4 +1,5 @@
 //index.js
+import regeneratorRuntime from '../../utils/runtime.js'
 const app = getApp()
 
 Page({
@@ -14,6 +15,8 @@ Page({
   },
 
   onLoad: function() {
+    this.foo()
+    console.log(this.foo());
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -26,7 +29,9 @@ Page({
       })
     }
   },
-
+  async foo(){
+    console.log('foo');
+  },
   getUserProfile() {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({

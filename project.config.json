@@ -39,6 +39,7 @@
   "appid": "wx8face7542606e0d8",
   "projectname": "music_miniprogram",
   "libVersion": "2.14.1",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []
