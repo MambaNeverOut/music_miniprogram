@@ -13,7 +13,7 @@ const axios = require('axios')
 const URL = 'https://apis.imooc.com/personalized?icode=E1D96667BD149D5E'
 
 const playlistCollection = db.collection('playlist')
-const MAX_LIMIT = 10;
+const MAX_LIMIT = 100;
 exports.main = async (event, context) => {
   // const playlist = await rp(URL).then(res=>{
   //   return JSON.parse(res).result
