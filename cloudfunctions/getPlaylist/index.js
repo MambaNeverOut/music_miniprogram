@@ -59,10 +59,12 @@ exports.main = async (event, context) => {
       }
     }
     if (flag) {
-      newData.push(playlist[i])
+      let pl = playlist[i]
+      pl.createTime = db.serverDate()
+      newData.push(pl)
     }
   }
-console.log(newData);
+  console.log(newData);
   if (newData.length > 0) {
     await playlistCollection.add({
       data: newData

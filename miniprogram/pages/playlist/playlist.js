@@ -84,10 +84,13 @@ Page({
       name: 'music',
       data: {
         start: this.data.playlist.length,
-        count: MAX_LIMIT
+        count: MAX_LIMIT,
+        $url: "playlist"
       }
     }).then(res => {
       console.log(res);
+      console.log(this);
+      console.log(this.data);
       this.setData({
         playlist: this.data.playlist.concat(res.result.data)
       })
