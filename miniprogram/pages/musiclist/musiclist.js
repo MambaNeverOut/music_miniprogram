@@ -14,6 +14,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
       name: 'music',
       data: {
@@ -25,14 +28,18 @@ Page({
       const pl = res.result.playlist;
       this.setData({
         musiclist: pl.tracks,
-        listInfo:{
+        listInfo: {
           coverImgUrl: pl.coverImgUrl,
           name: pl.name
         }
       })
+      this._setMusiclist();
+      wx.hideLoading()
     })
   },
-
+  _setMusiclist() {
+    wx.setStorageSync('musiclist', this.data.musiclist)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
