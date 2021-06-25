@@ -1,6 +1,7 @@
 const cloud = require('wx-server-sdk')
 const TcbRouter = require('tcb-router')
 const rp = require('request-promise')
+const axios = require('axios')
 
 const BASE_URL = 'https://apis.imooc.com'
 
@@ -22,11 +23,12 @@ exports.main = async (event, context) => {
         return res
       })
   })
-  app.router('musiclist',async(ctx,next)=>{
-    ctx.body = await rp(BASE_URL + '/playlist/detail?id=' + parseInt(event.playlistId)+'&' +ICODE).then(res=>{
-      return JSON.parse(res)
-    })
-
+  app.router('musiclist', async (ctx, next) => {
+    // ctx.body = await rp(BASE_URL + '/playlist/detail?id=' + parseInt(event.playlistId)+'&' +ICODE).then(res=>{
+    //   return JSON.parse(res)
+    // })
+    const res = await axios.get(`${BASE_URL}/playlist/detail?id=${parseInt(event.playlistId)}&${ICODE}`)
+    ctx.body = res.data
   })
   return app.serve()
 }
