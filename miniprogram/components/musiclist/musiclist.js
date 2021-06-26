@@ -24,7 +24,7 @@ Component({
         playingId: musicid
       })
       wx.navigateTo({
-        url: `../../pages/player/player?musicid=${musicid}&index=${index}`,
+        url: `../../pages/player/player?musicId=${musicid}&index=${index}`,
       })
     }
   }

@@ -38,6 +38,7 @@
       }
     ]
   },
+  "requiredBackgroundModes": ["audio"],
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }
