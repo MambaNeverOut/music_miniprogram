@@ -44,6 +44,12 @@ Page({
     }).then(res => {
       console.log(res);
       let result = res.result
+      if(result.data[0].url === null){
+        wx.showToast({
+          title: '无权限播放',
+        })
+        return
+      }
       backgroundAudiManager.src = result.data[0].url
       backgroundAudiManager.title = music.name
       console.log(backgroundAudiManager);
@@ -64,18 +70,20 @@ Page({
     })
   },
   onPrev() {
+    console.log('上一个');
     nowPlayingIndex--;
     if (nowPlayingIndex < 0) {
       nowPlayingIndex = musiclist.length - 1
-      this._loadMusicDetail(musiclist[nowPlayingIndex].id)
     }
+    this._loadMusicDetail(musiclist[nowPlayingIndex].id)
   },
   onNext() {
+    console.log('下一个');
     nowPlayingIndex++;
     if (nowPlayingIndex === musiclist.length) {
       nowPlayingIndex = 0
-      this._loadMusicDetail(musiclist[nowPlayingIndex].id)
     }
+    this._loadMusicDetail(musiclist[nowPlayingIndex].id)
    },
   /**
    * 生命周期函数--监听页面初次渲染完成
