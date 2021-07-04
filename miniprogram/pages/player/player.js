@@ -3,6 +3,7 @@ let musiclist = []
 let nowPlayingIndex = 0
 // 获取全局唯一的背景音频管理器
 const backgroundAudiManager = wx.getBackgroundAudioManager()
+const app = getApp()
 Page({
 
   /**
@@ -10,7 +11,9 @@ Page({
    */
   data: {
     picUrl: '',
-    isPlaying: false
+    isPlaying: false,
+    isLyricShow: false,
+    isSame: false
   },
 
   /**
@@ -22,16 +25,46 @@ Page({
     musiclist = wx.getStorageSync('musiclist')
     this._loadMusicDetail(options.musicId)
   },
+  onChangeLyricShow() {
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
+  },
+  onPlay() {
+    this.setData({
+      isPlaying: true
+    })
+  },
+  onPause() {
+    this.setData({
+      isPlaying: false
+    })
+  },
+  timeUpdate(event) {
+    this.selectComponent('.lyric').update(event.detail.currentTime)
+  },
+
   _loadMusicDetail(musicId) {
-    console.log(musicId);
-    // if ()
-    backgroundAudiManager.stop()
+    if (musicId == app.getPlayMusicId()) {
+      this.setData({
+        isSame: true
+      })
+    } else {
+      this.setData({
+        isSame: false
+      })
+    }
+    if (!this.data.isSame) {
+      backgroundAudiManager.stop()
+     }
     let music = musiclist[nowPlayingIndex]
     console.log(music);
     wx.setNavigationBarTitle({
       title: music.name
     })
     this.setData({ picUrl: music.al.picUrl, isPlaying: false })
+    // console.log(musicId, typeof musicId);
+    app.setPlayMusicId(musicId)
     wx.showLoading({
       title: '歌曲加载中',
     })
@@ -44,19 +77,38 @@ Page({
     }).then(res => {
       console.log(res);
       let result = res.result
-      if(result.data[0].url === null){
+      if (result.data[0].url === null) {
         wx.showToast({
           title: '无权限播放',
         })
         return
       }
-      backgroundAudiManager.src = result.data[0].url
-      backgroundAudiManager.title = music.name
-      console.log(backgroundAudiManager);
+      if(!this.data.isSame){
+        
+        backgroundAudiManager.src = result.data[0].url
+        backgroundAudiManager.title = music.name
+      }
       this.setData({
         isPlaying: true
       })
       wx.hideLoading()
+    })
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId: musicId,
+        $url: 'lyric',
+      }
+    }).then(res => {
+      console.log(res);
+      let lyric = '暂无歌词';
+      const lrc = res.result.lrc
+      if (lrc) {
+        lyric = lrc.lyric
+      }
+      this.setData({
+        lyric
+      })
     })
   },
   togglePlaying() {
@@ -84,7 +136,7 @@ Page({
       nowPlayingIndex = 0
     }
     this._loadMusicDetail(musiclist[nowPlayingIndex].id)
-   },
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

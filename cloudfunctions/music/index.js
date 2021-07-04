@@ -34,5 +34,9 @@ exports.main = async (event, context) => {
     const res = await axios.get(`${BASE_URL}/song/url?id=${parseInt(event.musicId)}&${ICODE}`)
     ctx.body = res.data
   })
+  app.router('lyric', async (ctx, next) => {
+    const res = await axios.get(`${BASE_URL}/lyric/url?id=${parseInt(event.musicId)}&${ICODE}`)
+    ctx.body = res.data
+  })
   return app.serve()
 }
