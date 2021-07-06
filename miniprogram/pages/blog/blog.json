@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "k-search":"../../components/search/search",
+    "k-login":"../../components/login/login"
+  },
+  "navigationBarTitleText": "发现"
 }
