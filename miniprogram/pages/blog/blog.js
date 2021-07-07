@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    modalShow: false
+    modalShow: false,
+    blogList: []
   },
   onPublish() {
     // this.setData({
@@ -45,11 +46,30 @@ Page({
       content: '',
     })
   },
+  _loadBlogList(start = 0) {
+    wx.showLoading({
+      title: '拼命加载中',
+    })
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        start,
+        count: 10,
+        $url: 'list',
+      }
+    }).then(res => {
+      this.setData({
+        blogList: this.data.blogList.concat(res.result)
+      })
+      wx.hideLoading()
+      wx.stopPullDownRefresh()
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._loadBlogList()
   },
 
   /**
@@ -84,14 +104,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      blogList: []
+    })
+    this._loadBlogList(0)
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this._loadBlogList(this.data.blogList.length)
   },
 
   /**
