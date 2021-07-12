@@ -140,7 +140,7 @@ Page({
           img: fileIds,
           createTime: db.serverDate() // 服务端时间
         }
-      }).then(res=>{
+      }).then(res => {
         wx.hideLoading()
         wx.showToast({
           title: '发布成功',
@@ -148,11 +148,16 @@ Page({
 
         // 返回blog页面，并且刷新
         wx.navigateBack()
-      }).catch(err=>{
-        wx.hideLoading()
-        wx.showToast({
-          title: '发布失败',
-        })
+        const pages = getCurrentPages()
+        // console.log(pages)
+        // 取到上一个页面
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
+      })
+    }).catch(err => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '发布失败',
       })
     })
   },
