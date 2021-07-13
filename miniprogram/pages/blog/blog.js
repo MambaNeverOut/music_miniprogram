@@ -85,6 +85,19 @@ Page({
    */
   onLoad: function (options) {
     this._loadBlogList()
+
+    // 小程序端调用云数据库
+    // const db = wx.cloud.database()
+    // db.collection('blog').orderBy('createTime', 'desc').get().then((res)=>{
+    //   console.log(res)
+    //   const data = res.data
+    //   for (let i = 0, len = data.length; i<len; i++){
+    //     data[i].createTime = data[i].createTime.toString()
+    //   }
+    //   this.setData({
+    //     blogList: data
+    //   })
+    // }) 
   },
 
   /**
