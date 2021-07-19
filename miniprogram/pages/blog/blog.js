@@ -47,7 +47,7 @@ Page({
       content: '',
     })
   },
-  onSearch(event){
+  onSearch(event) {
     console.log(event.detail.keyword);
     this.setData({
       blogList: []

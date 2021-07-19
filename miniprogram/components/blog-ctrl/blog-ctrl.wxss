@@ -33,7 +33,10 @@
   font-size: 32rpx;
 }
 
-.send {
+view .send {
+  width: 100rpx;
+  padding-left: 0;
+  padding-right: 0;
   background: #d43c33;
   color: #fff;
   font-size: 24rpx;
