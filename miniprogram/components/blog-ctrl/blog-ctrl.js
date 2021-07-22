@@ -76,16 +76,16 @@ Component({
         }
       }).then((res) => {
         console.log(res);
-        // 推送订阅消息
-        // wx.cloud.callFunction({
-        //   name: 'subscribeMsg',
-        //   data: {
-        //     content,
-        //     blogId: this.properties.blogId
-        //   }
-        // }).then((res) => {
-        //   console.log(res)
-        // })
+        推送订阅消息
+        wx.cloud.callFunction({
+          name: 'subscribeMsg',
+          data: {
+            content,
+            blogId: this.properties.blogId
+          }
+        }).then((res) => {
+          console.log(res)
+        })
 
         wx.hideLoading()
         wx.showToast({
@@ -120,7 +120,6 @@ Component({
     },
     // 调起客户端小程序订阅消息界面
     subscribeMsg() {
-      console.log('评论');
       this.setData({
         modalShow: true
       })
