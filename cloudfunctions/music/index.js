@@ -5,7 +5,7 @@ const axios = require('axios')
 
 const BASE_URL = 'https://apis.imooc.com'
 
-const ICODE = 'icode=E1D96667BD149D5E'
+const ICODE = 'icode=09F951EEB4A9ACF4'
 cloud.init({
   env: 'translate-env-mea2w'
 })

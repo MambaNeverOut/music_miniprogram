@@ -1,13 +1,15 @@
 {
   "pages": [
+    "pages/profile/profile",
     "pages/blog/blog",
     "pages/blog-edit/blog-edit",
     "pages/playlist/playlist",
     "pages/index/index",
-    "pages/profile/profile",
     "pages/musiclist/musiclist",
     "pages/player/player",
-    "pages/blog-comment/blog-comment"
+    "pages/blog-comment/blog-comment",
+    "pages/profile-playhistory/profile-playhistory",
+    "pages/profile-bloghistory/profile-bloghistory"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
