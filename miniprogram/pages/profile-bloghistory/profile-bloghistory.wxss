@@ -1,1 +1,7 @@
 /* pages/profile-bloghistory/profile-bloghistory.wxss */
+page{
+  background-color: #e7e7e7;
+}
+.blog-panel {
+  margin-bottom: 20rpx;
+}
