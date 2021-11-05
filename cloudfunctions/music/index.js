@@ -5,9 +5,10 @@ const axios = require('axios')
 
 const BASE_URL = 'https://apis.imooc.com'
 
-const ICODE = 'icode=09F951EEB4A9ACF4'
+const ICODE = 'icode=95FAA080B5BE67C7'
+
 cloud.init({
-  env: 'translate-env-mea2w'
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 
 exports.main = async (event, context) => {
